@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './HeroSection.css';
 
 const HeroSection = ({ title, subtitle, link, image }) => {
