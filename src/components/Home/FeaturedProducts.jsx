@@ -16,7 +16,7 @@ const FeaturedProducts = () => {
       <div className='align_center featured_products_list'>
         {error && <em className='form_error'>{error}</em>}
         {isLoading && skeletons.map((n) => <ProductCardSkeleton key={n} />)}
-        {filteredProducts.slice(0, 4).map((product) => (
+        {filteredProducts.slice(0, 3).map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
