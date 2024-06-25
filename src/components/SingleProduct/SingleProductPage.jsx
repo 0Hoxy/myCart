@@ -1,20 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './SingleProductPage.css';
 import QuantityInput from './QuantityInput';
 import { useParams } from 'react-router-dom';
 import useData from '../../Hook/useData';
 import Loader from '../Common/Loader';
+import CartContext from '../../contexts/CartContext';
+import UserContext from '../../contexts/UserContexts';
 
-const SingleProductPage = ({ addToCart }) => {
+const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { id } = useParams();
-  console.log(id);
 
   const { data: product, error, isLoading } = useData(`/products/${id}`);
-  console.log(product);
 
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useContext(CartContext);
+  const user = useContext(UserContext);
 
   return (
     <section className='align_center single_product'>
@@ -47,14 +50,18 @@ const SingleProductPage = ({ addToCart }) => {
             <p className='single_product_description'>{product.description}</p>
             <p className='single_product_price'>￦ {product.price.toLocaleString('ko-KR')} 원</p>
 
-            <h2 className='quantity_title'>구매개수:</h2>
-            <div className='align_center quantity_input'>
-              <QuantityInput quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
-            </div>
+            {user && (
+              <>
+                <h2 className='quantity_title'>구매개수:</h2>
+                <div className='align_center quantity_input'>
+                  <QuantityInput quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
+                </div>
 
-            <button className='search_button add_cart' onClick={() => addToCart(product, quantity)}>
-              장바구니 추가
-            </button>
+                <button className='search_button add_cart' onClick={() => addToCart(product, quantity)}>
+                  장바구니 추가
+                </button>
+              </>
+            )}
           </div>
         </>
       )}

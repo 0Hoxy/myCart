@@ -42,19 +42,7 @@ const ProductsList = () => {
       <div className='products_list'>
         {error && <em className='form_error'>{error}</em>}
         {isLoading && skeletons.map((n) => <ProductCardSkeleton key={n} />)}
-        {data.products &&
-          data.products.map((product) => (
-            <ProductCard
-              key={product._id}
-              id={product._id}
-              image={product.images[0]}
-              price={product.price}
-              title={product.title}
-              rating={product.rating}
-              ratingCounts={product.reviews.counts}
-              stock={product.stock}
-            />
-          ))}
+        {data.products && data.products.map((product) => <ProductCard key={product._id} product={product} />)}
       </div>
       {data && <Pagination total={data.totalProducts} perPage={8} onClick={handlePageChange} currentPage={page} />}
     </section>
