@@ -10,7 +10,6 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -18,7 +17,6 @@ const LoginPage = () => {
     try {
       await login(formData);
     } catch (err) {
-      reset();
       setFormError(err.response.data.message);
     }
   };

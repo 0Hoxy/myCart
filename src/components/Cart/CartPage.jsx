@@ -3,7 +3,7 @@ import remove from '../../assets/remove.png';
 import Table from '../Common/Table';
 import QuantityInput from '../SingleProduct/QuantityInput';
 import { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContexts';
+import UserContext from '../../contexts/UserContext';
 import CartContext from '../../contexts/CartContext';
 import { checkoutAPI } from '../../services/orderServices';
 import { toast } from 'react-toastify';

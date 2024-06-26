@@ -14,10 +14,11 @@ import {
 } from './services/cartServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UserContext from './contexts/UserContexts';
+import UserContext from './contexts/UserContext';
 import CartContext from './contexts/CartContext';
 
 setAuthToken(localStorage.getItem('token'));
+console.log(localStorage.getItem('token'));
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -35,6 +36,7 @@ const App = () => {
 
     addToCartAPI(product._id, quantity)
       .then((res) => {
+        console.log(user);
         toast.success('상품 추가 성공!');
       })
       .catch((err) => {
@@ -54,7 +56,7 @@ const App = () => {
         setUser(jwtUser);
       }
     } catch (error) {
-      console.log(error);
+      console.log('JWT 디코딩 실패:', error);
     }
   }, []);
 
@@ -100,6 +102,7 @@ const App = () => {
       });
     }
   };
+
   return (
     <UserContext.Provider value={user}>
       <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateCart, setCart }}>

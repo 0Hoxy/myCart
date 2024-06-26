@@ -5,7 +5,7 @@ import basket from '../../assets/basket.png';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import CartContext from '../../contexts/CartContext';
-import UserContext from '../../contexts/UserContexts';
+import UserContext from '../../contexts/UserContext';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
